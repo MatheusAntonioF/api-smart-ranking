@@ -1,4 +1,4 @@
-export interface IPlayer {
+export interface Player {
   readonly _id: string;
   readonly phone_number: string;
   readonly email: string;
