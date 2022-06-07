@@ -1,5 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreatePlayerDTO } from './dtos/create-player.dto';
+import { Player } from './interfaces/player.interface';
 import { PlayersService } from './players.service';
 
 @Controller('api/v1/players')
@@ -9,5 +10,10 @@ export class PlayersController {
   @Post()
   async createPlayer(@Body() createPlayerDTO: CreatePlayerDTO) {
     await this.playersService.createPlayer(createPlayerDTO);
+  }
+
+  @Get()
+  async getPlayers(): Promise<Player[]> {
+    return this.playersService.getAllPlayers();
   }
 }
