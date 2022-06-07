@@ -11,7 +11,18 @@ export class PlayersService {
   private readonly logger = new Logger(PlayersService.name);
 
   async createPlayer(createPlayerDTO: CreatePlayerDTO): Promise<void> {
-    this.create(createPlayerDTO);
+    const { email } = createPlayerDTO;
+
+    const playerExists = await this.players.find(
+      (player) => player.email === email,
+    );
+    console.log('🚀 ~ playerExists', playerExists);
+
+    if (playerExists) {
+      await this.update(playerExists, createPlayerDTO);
+    } else {
+      await this.create(createPlayerDTO);
+    }
   }
 
   async getAllPlayers(): Promise<Player[]> {
@@ -34,5 +45,13 @@ export class PlayersService {
     this.logger.log(player);
 
     this.players.push(player);
+  }
+
+  private update(foundPlayer: Player, createPlayerDTO: CreatePlayerDTO): void {
+    const { name } = createPlayerDTO;
+
+    this.players = this.players.map((player) =>
+      player.email === foundPlayer.email ? { ...foundPlayer, name } : player,
+    );
   }
 }
