@@ -6,12 +6,6 @@ import { PlayersModule } from './players/players.module';
   imports: [
     MongooseModule.forRoot(
       'mongodb+srv://mongo-user:8JuovLVuVvLVu68J@cluster0.raf7p.mongodb.net/smartranking?retryWrites=true&w=majority',
-      {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-      },
     ),
     PlayersModule,
   ],
