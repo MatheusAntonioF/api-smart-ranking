@@ -4,7 +4,6 @@ export const PlayerSchema = new Schema(
   {
     phone_number: {
       type: String,
-      unique: true,
     },
     email: {
       type: String,
