@@ -53,6 +53,6 @@ export class PlayersService {
   }
 
   async deletePlayer(email: string): Promise<any> {
-    return this.playerModel.remove({ email }).exec();
+    return this.playerModel.deleteOne({ email }).exec(); // remove is deprecated, instead use deleteOne for example
   }
 }
