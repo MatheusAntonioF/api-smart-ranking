@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PlayersModule } from './players/players.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -8,8 +9,13 @@ import { PlayersModule } from './players/players.module';
       'mongodb+srv://mongo-user:8JuovLVuVvLVu68J@cluster0.raf7p.mongodb.net/smartranking?retryWrites=true&w=majority',
     ),
     PlayersModule,
+    CategoriesModule,
   ],
   controllers: [],
   providers: [],
 })
 export class AppModule {}
+
+// mongodb+srv://mongo-user:<password>@cluster0.raf7p.mongodb.net/?retryWrites=true&w=majority
+
+// mongodb+srv://mongo-user:8JuovLVuVvLVu68J@cluster0.raf7p.mongodb.net/smartranking?retryWrites=true&w=majority

@@ -21,7 +21,7 @@ import { UpdatePlayerDTO } from './dtos/update-player.dto';
 export class PlayersController {
   constructor(private readonly playersService: PlayersService) {}
 
-  @Get()
+  @Get('')
   async getPlayers(): Promise<Player[] | Player> {
     return this.playersService.getAllPlayers();
   }
