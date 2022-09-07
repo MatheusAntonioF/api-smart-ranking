@@ -15,7 +15,3 @@ import { CategoriesModule } from './categories/categories.module';
   providers: [],
 })
 export class AppModule {}
-
-// mongodb+srv://mongo-user:<password>@cluster0.raf7p.mongodb.net/?retryWrites=true&w=majority
-
-// mongodb+srv://mongo-user:8JuovLVuVvLVu68J@cluster0.raf7p.mongodb.net/smartranking?retryWrites=true&w=majority
