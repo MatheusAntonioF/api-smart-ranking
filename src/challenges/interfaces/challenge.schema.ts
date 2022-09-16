@@ -16,6 +16,10 @@ export const ChallengeSchema = new Mongoose.Schema(
         ref: 'Player',
       },
     ],
+    match: {
+      type: Mongoose.Schema.Types.ObjectId,
+      ref: 'Match',
+    },
   },
   { timestamps: true, collection: 'challenges' },
 );

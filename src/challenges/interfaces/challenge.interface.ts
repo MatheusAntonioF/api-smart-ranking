@@ -10,4 +10,16 @@ export interface Challenge extends Document {
   dateTimeChallenge: Date;
   status: ChallengeStatusEnum;
   category: Category;
+  match: Match;
+}
+
+export interface Match extends Document {
+  categoria: string;
+  jogadores: Array<Player>;
+  def: Player;
+  result: Array<Resultado>;
+}
+
+export interface Resultado {
+  set: string;
 }

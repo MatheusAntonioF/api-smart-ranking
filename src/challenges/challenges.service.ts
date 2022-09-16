@@ -60,4 +60,24 @@ export class ChallengesService {
 
     return createdChallenge.save();
   }
+
+  async getChallengesByPlayerId(player_id: string): Promise<Challenge[]> {
+    return await this.challengeModel
+      .find()
+      .where('players')
+      .in([player_id])
+      .populate('players')
+      .populate('challenger')
+      .populate('match')
+      .exec();
+  }
+
+  async getAllChallenges(): Promise<Challenge[]> {
+    return this.challengeModel
+      .find()
+      .populate('players')
+      .populate('challenger')
+      .populate('match')
+      .exec();
+  }
 }
