@@ -38,6 +38,16 @@ export class CategoriesService {
     return foundCategory;
   }
 
+  async getCategoryFromPlayer(player_id: string): Promise<Category> {
+    const foundCategory = await this.categoryModel
+      .findOne()
+      .where('players')
+      .in([player_id])
+      .exec();
+
+    return foundCategory;
+  }
+
   async createCategory(
     createCategoryDTO: CreateCategoryDTO,
   ): Promise<Category> {
