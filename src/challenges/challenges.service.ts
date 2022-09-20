@@ -4,13 +4,15 @@ import { Model } from 'mongoose';
 import { CategoriesService } from 'src/categories/categories.service';
 import { PlayersService } from 'src/players/players.service';
 import { CreateChallengeDTO } from './dtos/create-challenge.dto';
+import { CreateMatchDTO } from './dtos/create-match.dto';
 import { ChallengeStatusEnum } from './enum/challenge-status.enum';
-import { Challenge } from './interfaces/challenge.interface';
+import { Challenge, Match } from './interfaces/challenge.interface';
 
 @Injectable()
 export class ChallengesService {
   constructor(
     @InjectModel('Challenge') private readonly challengeModel: Model<Challenge>,
+    @InjectModel('Match') private readonly matchModel: Model<Match>,
 
     private readonly categoriesService: CategoriesService,
     private readonly playersService: PlayersService,
@@ -78,6 +80,29 @@ export class ChallengesService {
       .populate('players')
       .populate('challenger')
       .populate('match')
+      .exec();
+  }
+
+  async createMatch(
+    challenge_id: string,
+    match: CreateMatchDTO,
+  ): Promise<void> {
+    const foundChallenge = await this.challengeModel.findById(challenge_id);
+
+    const createdMatch = await this.matchModel.create(match);
+
+    createdMatch.category = foundChallenge.category;
+
+    createdMatch.players = foundChallenge.players;
+
+    const result = await createdMatch.save();
+
+    foundChallenge.status = ChallengeStatusEnum.REALIZADO;
+
+    foundChallenge.match = result._id;
+
+    await this.challengeModel
+      .findOneAndUpdate({ _id: challenge_id }, foundChallenge)
       .exec();
   }
 }
